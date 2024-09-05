@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Attendance Policy - Elite Professional Solutions Pvt. Ltd.</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="Untitled.png" alt="Elite Professional Solutions Pvt. Ltd. Logo">
+        </div>
+        <h1>Attendance & Leave Policy</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>1. Work Days and Holidays</h2>
+            <p><strong>Work Days:</strong> Monday to Saturday</p>
+            <p><strong>Off Day:</strong> Sunday</p>
+            <p><strong>Public Holidays:</strong> Off, only if approved by management.</p>
+        </section>
+
+        <section>
+            <h2>2. Work Time and Attendance</h2>
+            <p><strong>Start Time:</strong> All employees must start work by 10:00 AM.</p>
+            <p><strong>Morning Meeting:</strong> Attendance is mandatory. If an employee is unable to start at 10:00 AM, they must inform their higher official with a valid reason.</p>
+            <p><strong>Work Hours:</strong> No fixed number of hours per day, but daily assigned tasks must be completed. Failure to deliver tasks may result in a loss of pay or a deduction of half a day's pay.</p>
+            <p><strong>Monitoring:</strong> Employees must be available on WhatsApp during work hours. Being unavailable for more than 30 minutes without notifying a higher official may result in a loss of pay for a full day or half a day.</p>
+        </section>
+
+        <section>
+            <h2>3. Payable Leaves</h2>
+            <p><strong>Casual Leave:</strong> 1 casual leave with pay per month.</p>
+            <p><strong>Medical Leave:</strong> 1 medical leave without submitting a medical certificate. For more than 1 medical leave, a medical certificate must be submitted. Payment for additional medical leaves is subject to management's approval.</p>
+        </section>
+
+        <section>
+            <h2>4. Salary</h2>
+            <p><strong>Salary Credit Date:</strong> 5th of every month. If the 5th is a bank holiday, salary will be credited the next day.</p>
+            <p><strong>Salary Calculation Period:</strong> From the 1st to the last day of each month.</p>
+        </section>
+
+        <section>
+            <h2>Contact Us</h2>
+            <p><strong>Address:</strong> Elite Professional Solutions Pvt. Ltd., No: 4/461, 2nd Floor, Valamkottil Towers, Judgemukku, Kakkanad, Kochi, Kerala PIN: 682021</p>
+            <p><strong>Mobile:</strong> +91 7902468500</p>
+            <p><strong>Email:</strong> createresumewithus@gmail.com, support@eliteresumes.in</p>
+        </section>
+
+        <section class="agreement-form">
+            <h2>I Agree to the Leave Policy of Elite Professional Solutions Pvt. Ltd.</h2>
+            <form id="leaveForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                <label for="contact">Contact Number:</label>
+                <input type="tel" id="contact" name="contact" placeholder="Enter your contact number" required>
+
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+
+                <input type="submit" value="I Agree">
+            </form>
+
+            <p id="responseMessage"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Elite Professional Solutions Pvt. Ltd. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbx2Ru3urauoJXj01YybHnxNJhiechMYba9zoHANJiYghAc7gVVtxONq2vv7m8px4wBpWQ/exec';
+
+        const form = document.getElementById('leaveForm');
+        const responseMessage = document.getElementById('responseMessage');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                contact: formData.get('contact'),
+                date: formData.get('date')
+            };
+
+            fetch(scriptURL, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(responseData => {
+                if (responseData.result === 'success') {
+                    responseMessage.textContent = 'Form successfully submitted!';
+                    form.reset();  // Clear the form after submission
+                } else {
+                    responseMessage.textContent = 'Form submission failed. Please try again.';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                responseMessage.textContent = 'Error occurred during submission.';
+            });
+        });
+    </script>
+</body>
+</html>
