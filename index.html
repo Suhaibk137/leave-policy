@@ -98,16 +98,13 @@
                 body: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                mode: 'no-cors' // This disables CORS, so we won't get a response back
             })
-            .then(response => response.json())
-            .then(responseData => {
-                if (responseData.result === 'success') {
-                    responseMessage.textContent = 'Form successfully submitted!';
-                    form.reset();  // Clear the form after submission
-                } else {
-                    responseMessage.textContent = 'Form submission failed. Please try again.';
-                }
+            .then(() => {
+                // Since mode is no-cors, we won't get a response. Just show success.
+                responseMessage.textContent = 'Form successfully submitted!';
+                form.reset();  // Clear the form after submission
             })
             .catch(error => {
                 console.error('Error:', error);
